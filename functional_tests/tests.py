@@ -6,7 +6,7 @@ import time
 
 TITLE = 'Portfolio Watcher'
 HEADER = 'Welcome to Portfolio Watcher'
-MESSAGE = 'Here at Portfolio Watcher, we make it easy to track your investments. \n'
+MESSAGE = 'Here at Portfolio Watcher, we make it easy to track your investments.\n'
 MESSAGE += 'Please select below to login or create an account'
 MAX_WAIT = 10
 
@@ -51,8 +51,8 @@ class NewVisitorTest(unittest.TestCase):
         # Below this, he sees two buttons, one offering to create an account, and the other offering to login.
         login = self.browser.find_element_by_id('id_login').text
         create = self.browser.find_element_by_id('id_create').text
-        self.assertIn('login', login)
-        self.assertIn('create account', create)
+        self.assertIn('Login!', login)
+        self.assertIn('Create an account!', create)
 
     # def test_new_user_can_create_account(self):
     #     pass

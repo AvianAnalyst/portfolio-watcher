@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 selenium = "*"
-pytest = "*"
 
 [packages]
 django = "*"
