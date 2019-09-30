@@ -5,10 +5,10 @@ verify_ssl = true
 
 [dev-packages]
 selenium = "*"
+pytest = "*"
 
 [packages]
 django = "*"
-pytest = "*"
 
 [requires]
 python_version = "3.7"
