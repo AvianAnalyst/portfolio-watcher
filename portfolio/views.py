@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect as Redirect
 from django.http import JsonResponse
 from django.shortcuts import render
+from datetime import date
 
 from portfolio.forms import PortfolioRequestForm, InvestmentEntryForm, AddCompanyForm
 from .models import Company, Investment
@@ -27,29 +28,31 @@ def create_investment(request):
         form = InvestmentEntryForm(request.POST)
         if form.is_valid():
             form.save()
-            return Redirect('/investments')
+            company = form.cleaned_data.get('company', 'error')
+            shares = form.cleaned_data.get('num_of_shares', 'error')
+            message = f'Thanks, your entry for {company} with {shares} shares was entered!'
+            return render(request, 'invest.html', {'form': form, 'message': message})
     else:
         form = InvestmentEntryForm()
         return render(request, 'invest.html', {'form': form})
 
 
 def get_portfolio(request):
+    requested_date = request.GET.get('investment_date', date.today())
     data = []
     companies = Company.objects.all()
     for company in companies:
         entry = {'company': company.name}
         try:
-            investment = Investment.objects.filter(company=company).order_by('purchase_date')[0]
+            investment = Investment.objects.filter(company=company, purchase_date__lte=requested_date).order_by('-purchase_date')[0]
             entry['quantity'] = investment.num_of_shares
             entry['cost'] = investment.cost
+            data.append(entry)
         except IndexError:
             pass
-            entry['quantity'] = 0
-            entry['cost'] = 0
-        data.append(entry)
     return JsonResponse(data, safe=False)
 
 
-def retreive(request):
+def retrieve(request):
     form = PortfolioRequestForm()
     return render(request, 'retrieve.html', {'form': form})

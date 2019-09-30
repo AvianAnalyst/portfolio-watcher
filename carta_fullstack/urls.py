@@ -21,5 +21,5 @@ urlpatterns = [
     path('create/investment', views.create_investment, name='invest'),
     path('create/company', views.create_company, name='add_company'),
     path('investments', views.get_portfolio, name='investments'),
-    path('retrieve', views.retreive, name='retreive'),
+    path('retrieve', views.retrieve, name='retrieve'),
 ]

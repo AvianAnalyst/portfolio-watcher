@@ -1,4 +1,5 @@
 from django import forms
+from datetime import date
 from .models import Investment, Company
 
 
@@ -9,16 +10,19 @@ class AddCompanyForm(forms.ModelForm):
         fields = ('name',)
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class InvestmentEntryForm(forms.ModelForm):
 
     class Meta:
         model = Investment
         fields = ('purchase_date', 'company', 'cost', 'num_of_shares')
-
-
-class DateInput(forms.DateInput):
-    input_type = 'date'
+        widgets = {
+            'purchase_date': DateInput,
+        }
 
 
 class PortfolioRequestForm(forms.Form):
-    investment_date = forms.DateField(label='investments date', widget=DateInput)
+    investment_date = forms.DateField(label='investments date', widget=DateInput, initial=date.today)
