@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Invest</title>
+    </head>
+    <body>
+        <form action="/create/investment" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" value="Submit">Save</button>
+        </form>
+        <p>Don't see the company? Try adding it here: <a href="company"><button type="button">Add company!</button></a></p>
+    </body>
+</html>
