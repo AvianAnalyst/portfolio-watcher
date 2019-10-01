@@ -22,7 +22,3 @@ class InvestmentEntryForm(forms.ModelForm):
         widgets = {
             'purchase_date': DateInput,
         }
-
-
-class PortfolioRequestForm(forms.Form):
-    investment_date = forms.DateField(label='investments date', widget=DateInput, initial=date.today)

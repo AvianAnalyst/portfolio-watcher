@@ -1,6 +1,6 @@
 <template>
     <div class="table">
-        <table>
+        <table class="table table-bordered table-striped text-center">
             <tr>
                 <th>Company</th>
                 <th>Cost</th>
@@ -21,13 +21,3 @@
     };
 </script>
 
-<style scoped>
-    <div> {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
-</style>

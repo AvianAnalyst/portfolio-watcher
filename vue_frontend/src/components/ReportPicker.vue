@@ -1,15 +1,24 @@
 <template>
     <div class="report">
-        <form method="get" target="http://localhost:8000/investments">
-            <input type="date">
-            <button type="submit">Submit</button>
-        </form>
+        <input v-model="date" @change="sendUpDate" type="date"> <p>{{date}}</p>
     </div>
 </template>
 
 <script>
     export default {
         name: "report",
+        data(){
+            return {
+                date: null,
+            };
+        },
+        methods: {
+            sendUpDate() {
+                this.$emit('change', this.date);
+                // eslint-disable-next-line no-console
+                console.log(this.date);
+            }
+        },
     };
 </script>
 

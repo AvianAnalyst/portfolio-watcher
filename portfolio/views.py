@@ -1,9 +1,8 @@
 from django.http import HttpResponseRedirect as Redirect
 from django.http import JsonResponse
 from django.shortcuts import render
-from datetime import date
 
-from portfolio.forms import PortfolioRequestForm, InvestmentEntryForm, AddCompanyForm
+from portfolio.forms import *
 from .models import Company, Investment
 
 
@@ -51,8 +50,3 @@ def get_portfolio(request):
         except IndexError:
             pass
     return JsonResponse(data, safe=False)
-
-
-def retrieve(request):
-    form = PortfolioRequestForm()
-    return render(request, 'retrieve.html', {'form': form})
