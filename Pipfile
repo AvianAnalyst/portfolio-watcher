@@ -10,6 +10,7 @@ pytest = "*"
 [packages]
 django = "*"
 django-cors-headers = "*"
+invoke = "*"
 
 [requires]
 python_version = "3.7"

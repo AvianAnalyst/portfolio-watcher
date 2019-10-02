@@ -1,15 +1,12 @@
 # Portfolio Watcher
 
 ### Quick Start: <br>
-First verify dependencies and the projects:
 ```bash
 # starting in the project home directory
 pipenv sync
-pipenv run migrate
-pipenv run start
-cd vue_frontend
-npm install
-npm run serve
+invoke start-django
+# open a new terminal
+invoke start-vue
 ```
 
 To add investments, open your browser to the django project: [Default](http://localhost:8000/).
