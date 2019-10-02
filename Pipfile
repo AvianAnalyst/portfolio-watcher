@@ -15,4 +15,5 @@ django-cors-headers = "*"
 python_version = "3.7"
 
 [scripts]
+migrate = "python manage.py migrate"
 start = "python manage.py runserver"

@@ -5,6 +5,7 @@ First verify dependencies and the projects:
 ```bash
 # starting in the project home directory
 pipenv sync
+pipenv run migrate
 pipenv run start
 cd vue_frontend
 npm install
