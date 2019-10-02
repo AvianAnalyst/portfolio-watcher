@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="container">
         <ReportPicker v-on:change="updateDate" />
-        <Table v-bind:data="data" class="col-md"/>
+        <Table v-bind:data="investments" class="col-md"/>
     </div>
 </template>
 
@@ -19,30 +19,30 @@
             async updateDate(date) {
                 this.date = date;
                 // eslint-disable-next-line no-console
-                console.log('updating date');
-                await this.updateData()
+                console.log('updating investments');
+                await this.updateInvestments()
             },
-            async updateData() {
+            async updateInvestments() {
                 let url = 'http://localhost:8000/investments';
                 if (this.date) {
                     url += '?investment_date=' + this.date;
                 }
-                const data = await fetch(url);
-                this.data = await data.json();
+                const investments = await fetch(url);
+                this.investments = await investments.json();
                 // eslint-disable-next-line no-console
-                console.log(this.data);
+                console.log(this.investments);
                 // eslint-disable-next-line no-console
-                console.log('updating data with ' + url)
+                console.log('updating investments with ' + url)
             },
         },
         data(){
             return {
-                data: null,
+                investments: null,
                 date: null,
             };
         },
         async created() {
-            await this.updateData()
+            await this.updateInvestments()
         },
     }
 

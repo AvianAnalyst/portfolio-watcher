@@ -1,6 +1,8 @@
 <template>
     <div class="report">
-        <input v-model="date" @change="sendUpDate" type="date"> <p>{{date}}</p>
+        <input v-model="date" @change="sendUpDate" type="date">
+        <p v-if="date">Report for: {{date}}</p>
+        <p v-else>Report as of Today</p>
     </div>
 </template>
 
