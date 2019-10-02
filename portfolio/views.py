@@ -38,12 +38,16 @@ def create_investment(request):
 
 def get_portfolio(request):
     requested_date = request.GET.get('investment_date', date.today())
+    info_date = request.GET.get('info_date', date.today())
     data = []
     companies = Company.objects.all()
     for company in companies:
         entry = {'company': company.name}
         try:
-            investment = Investment.objects.filter(company=company, purchase_date__lte=requested_date).order_by('-purchase_date')[0]
+            investment = Investment.objects.filter(company=company,
+                                                   purchase_date__lte=requested_date,
+                                                   entry_date__lte=info_date).order_by('-purchase_date',
+                                                                                       '-entry_date')[0]
             entry['quantity'] = investment.num_of_shares
             entry['cost'] = investment.cost
             data.append(entry)
