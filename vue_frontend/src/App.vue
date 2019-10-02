@@ -5,24 +5,19 @@
         <h1>Data through:</h1>
         <ReportPicker v-on:change="updateInfoDate" />
         <Table v-bind:data="investments" class="col-md"/>
-<!--        TODO: fix the below, use axios? research how to post to django csrf issue -->
-        <AddCompany v-on:click="saveCompany" />
     </div>
 </template>
 
 <script>
     import Table from "./components/Table";
     import ReportPicker from "./components/ReportPicker";
-    import AddCompany from "./components/AddCompany";
     import axios from 'axios'
 
     export default {
         name: 'app',
         components: {
             Table,
-            ReportPicker,
-            // eslint-disable-next-line vue/no-unused-components
-            AddCompany
+            ReportPicker
         },
         methods: {
             async updateReportDate(date) {
