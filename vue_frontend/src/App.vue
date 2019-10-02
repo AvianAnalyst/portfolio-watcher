@@ -5,18 +5,24 @@
         <h1>Data through:</h1>
         <ReportPicker v-on:change="updateInfoDate" />
         <Table v-bind:data="investments" class="col-md"/>
+<!--        TODO: fix the below, use axios? research how to post to django csrf issue -->
+        <AddCompany v-on:click="saveCompany" />
     </div>
 </template>
 
 <script>
     import Table from "./components/Table";
     import ReportPicker from "./components/ReportPicker";
+    import AddCompany from "./components/AddCompany";
+    import axios from 'axios'
 
     export default {
         name: 'app',
         components: {
             Table,
-            ReportPicker
+            ReportPicker,
+            // eslint-disable-next-line vue/no-unused-components
+            AddCompany
         },
         methods: {
             async updateReportDate(date) {
@@ -32,22 +38,19 @@
                 await this.updateInvestments()
             },
             async updateInvestments() {
-                let url = 'http://localhost:8000/investments';
-                if (this.report_date) {
-                    url += '?investment_date=' + this.report_date + '&';
-                }
-                if (this.info_date) {
-                    url += 'info_date=' + this.info_date;
-                }
-                const investments = await fetch(url);
-                this.investments = await investments.json();
+                this.makeUrl();
+                const investments = await axios.get(this.url);
+                this.investments = await investments.data;
                 // eslint-disable-next-line no-console
                 console.log(this.investments);
                 // eslint-disable-next-line no-console
-                console.log('updating investments with ' + url)
+                console.log('updating investments with ' + this.url)
             },
             makeUrl() {
-                switch (this.info_date + this.report_date) {
+                // eslint-disable-next-line no-console
+                console.log('this.info_date + this.report_date =' +
+                            (Boolean(this.report_date) + Boolean(this.info_date)));
+                switch (Boolean(this.info_date) + Boolean(this.report_date)) {
                     case 0:
                         this.url = 'http://localhost:8000/investments';
                         break;
@@ -60,8 +63,7 @@
                         }
                         break;
                     case 2:
-                        this.url = 'http://localhost:8000/investments?investment_date=' +
-                                    this.report_date + '&info_date=' + this.info_date;
+                        this.url = 'http://localhost:8000/investments?investment_date=' + this.report_date + '&info_date=' + this.info_date;
                 }
             }
         },
