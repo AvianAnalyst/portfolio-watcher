@@ -18,6 +18,7 @@ def start_django(c):
     with c.cd('vue_frontend'):
         c.run('npm run serve')
 
+
 @task(ready_vue)
 def start_vue(c):
     with c.cd('vue_frontend'):
